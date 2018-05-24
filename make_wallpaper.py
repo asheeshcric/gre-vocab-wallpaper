@@ -9,23 +9,46 @@ import textwrap
 from PIL import Image, ImageFont, ImageDraw
 
 
+def prepare_empty_files(lines):
+    if os.stat("seen-words.txt").st_size == 0:
+        with open("seen-words.txt", 'w') as file:
+            file.write(json.dumps({"words": []}))
+
+    if os.stat("today-words.txt").st_size == 0:
+        # For an empty file
+        update_words(lines)
+
+
 def get_random_words(lines):
     count = 0
     words = {}
+    seen_words = json.loads(open('seen-words.txt').read()).get('words')
     while 1:
         random_number = random.randint(0, len(lines) - 1)
         word = lines[random_number].split("-")[0].replace(" ", "")
+        word = word.lstrip()
         meaning = lines[random_number].split("-")[1].replace("\n", "")
-        if word in open('seen-words.txt').read():
+        if word in seen_words:
             continue
-        words[word] = meaning
+        words[word] = meaning.lstrip()
         count += 1
-        if count == 10 or len(lines) - len(open('seen-words.txt').readlines()) < 10:
+        if count == 10 or len(lines) - len(seen_words) < 10:
             break
     return words
 
 
+def move_words_to_seen():
+    words = json.loads(open('today-words.txt').read()).get('words')
+    words = list(words.keys())
+    seen_words = json.loads(open('seen-words.txt').read())
+    seen_words['words'] = seen_words.get('words') + words
+    with open('seen-words.txt', 'w') as file:
+        file.write(json.dumps(seen_words))
+
+
 def update_words(lines):
+    if not os.stat("today-words.txt").st_size == 0:
+        move_words_to_seen()
     today_words = {'words': get_random_words(lines)}
     today_words['last_updated'] = datetime.datetime.today().strftime("%Y-%m-%d")
     today_words['last_word'] = None
@@ -36,19 +59,19 @@ def update_words(lines):
 def main():
     lines = open('vocab-list.txt').readlines()
 
-    if os.stat("today-words.txt").st_size == 0:
-        # For an empty file
-        update_words(lines)
+    # Check if files are empty (today's words and seen words)
+    prepare_empty_files(lines)
 
-    if (json.loads(open('today-words.txt').read())).get('last_updated') != datetime.datetime.today().strftime("%Y-%m-%d"):
+    if (json.loads(open('today-words.txt').read())).get('last_updated') != datetime.datetime.today().strftime(
+            "%Y-%m-%d"):
         # Update the set of words everyday
         update_words(lines)
-    
+
     today_words = json.loads(open('today-words.txt').read())
     words = set(today_words.get('words').keys()) - {today_words.get('last_word')}
     current_word = random.sample(words, 1)[0]
     current_meaning = today_words['words'].get(current_word)
-            
+
     # Editing the background image
     img = Image.open('sample.jpg')
     draw = ImageDraw.Draw(img)
