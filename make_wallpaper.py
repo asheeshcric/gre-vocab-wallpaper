@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import json
 import os
 import random
 import textwrap
@@ -29,19 +30,14 @@ def main():
 
     if os.stat("today-words.txt").st_size == 0:
         today_words = get_random_words(lines)
-        print(today_words)
         with open('today-words.txt', 'a') as f1:
-            for word in today_words:
-                f1.write(word + ' - ' + today_words[word])
-                f1.write('\n')
+            f1.write(json.dumps(today_words))
 
-    today_lines = open('today-words.txt').readlines()
-    random_number = random.randint(0, len(today_lines) - 1)
-
-    current_line = today_lines[random_number]
-    current_word = current_line.split("-")[0].replace(" ", "")
-    current_meaning = current_line.split("-")[1].replace("\n", "")
-
+    today_words = json.loads(open('today-words.txt').read())
+    words = set(today_words.keys()) - {today_words.get('last_word')}
+    current_word = random.sample(words, 1)[0]
+    current_meaning = today_words.get(current_word)
+            
     # Editing the background image
     img = Image.open('sample.jpg')
     draw = ImageDraw.Draw(img)
