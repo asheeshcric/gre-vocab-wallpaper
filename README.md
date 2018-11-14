@@ -51,3 +51,11 @@ I would appreciate contributions. Feel free to make a PR and improve this versio
 ## Authors
 
 * **Ashish Jaiswal** - *Initial work* - [ashishjaiswal](http://jashish.com.np)
+
+## Feedback
+
+Feel free to contact for any feedback or information
+
+## License
+
+This repository in under the MIT License: [License](https://github.com/asheeshcric/gre-vocab-wallpaper/blob/master/LICENSE)
