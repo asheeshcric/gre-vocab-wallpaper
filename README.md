@@ -2,7 +2,7 @@
 
 A python script that displays 10 random GRE words each day from a long list of words. The words jumble up every minute so that you can slowly perfect 10 complex vocabs each day while working.
 
-![alt text](https://raw.githubusercontent.com/asheeshcric/gre-vocab-wallpaper/wallpaper.jpg)
+![alt text](https://github.com/asheeshcric/gre-vocab-wallpaper/blob/master/wallpaper.jpg)
 
 
 ## Getting Started
