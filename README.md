@@ -29,7 +29,7 @@ For that purpose, open your command line terminal and type in the following comm
 Then paste in the following command at the end of the file:
 
 ```
- */1 * * * * cd /path/to/your/repo_folder && /path/to/the/script
+ */1 * * * * cd /path/to/the/repo_folder && /path/to/the/repo_folder/make_wallpaper.py
 ```
 You can google "How to set up a cronjob" if the above method doesn't work in windows.
 
