@@ -1,6 +1,6 @@
 # GRE Vocab Wallpaper
 
-A python script that displays 10 random GRE words each day from a long list of words. The words jumble up every minute so that you can slowly perfect 10 complex vocabs each day while working.
+A python script that displays 10 random GRE words each day from a long list of words. The words jumble up each minute so that you can unknowingly perfect 10 complex vocabs; without even giving in much effort.
 
 ![alt text](https://github.com/asheeshcric/gre-vocab-wallpaper/blob/master/wallpaper.jpg)
 
