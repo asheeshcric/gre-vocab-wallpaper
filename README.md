@@ -57,7 +57,7 @@ I would appreciate contributions. Feel free to make a PR and improve this versio
 
 ## Feedback
 
-Feel free to contact for any feedback or information
+Feel free to contact for any feedback or information <ashiz2013@gmail.com>
 
 ## License
 
