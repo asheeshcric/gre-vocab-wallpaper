@@ -53,7 +53,7 @@ I would appreciate contributions. Feel free to make a PR and improve this versio
 
 ## Authors
 
-* **Ashish Jaiswal** - *Initial work* - [ashishjaiswal](http://jashish.com.np)
+* **Ashish Jaiswal** - *Initial work* - [Ashish Jaiswal](http://jashish.com.np)
 
 ## Feedback
 
