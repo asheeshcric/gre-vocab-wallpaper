@@ -31,7 +31,7 @@ Then paste in the following command at the end of the file:
 ```
  */1 * * * * cd /path/to/the/repo_folder && /path/to/the/repo_folder/make_wallpaper.py
 ```
-You can google "How to set up a cronjob" if the above method doesn't work in windows.
+You can google **"How to set up a cronjob"** if the above method doesn't work in windows.
 
 NOTE: You may have to give permission to run the script as a shell command. For that, you can use:
 
