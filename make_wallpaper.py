@@ -56,7 +56,22 @@ def update_words(lines):
         f1.write(json.dumps(today_words))
 
 
-def edit_wallpaper(current_word, current_meaning):
+def main():
+    lines = open('vocab-list.txt').readlines()
+
+    # Check if files are empty (today's words and seen words)
+    prepare_empty_files(lines)
+
+    if (json.loads(open('today-words.txt').read())).get('last_updated') != datetime.datetime.today().strftime(
+            "%Y-%m-%d"):
+        # Update the set of words everyday
+        update_words(lines)
+
+    today_words = json.loads(open('today-words.txt').read())
+    words = set(today_words.get('words').keys()) - {today_words.get('last_word')}
+    current_word = random.sample(words, 1)[0]
+    current_meaning = today_words['words'].get(current_word)
+
     # Editing the background image
     img = Image.open('sample.jpg')
     draw = ImageDraw.Draw(img)
@@ -75,49 +90,9 @@ def edit_wallpaper(current_word, current_meaning):
         padding += 100
     img.save('wallpaper.jpg')
 
-
-def single_word_meaning():
-    lines = open('vocab-list.txt').readlines()
-
-    # Check if files are empty (today's words and seen words)
-    prepare_empty_files(lines)
-
-    if (json.loads(open('today-words.txt').read())).get('last_updated') != datetime.datetime.today().strftime(
-            "%Y-%m-%d"):
-        # Update the set of words everyday
-        update_words(lines)
-
-    today_words = json.loads(open('today-words.txt').read())
-    words = set(today_words.get('words').keys()) - {today_words.get('last_word')}
-    current_word = random.sample(words, 1)[0]
-    current_meaning = today_words['words'].get(current_word)
-
-    edit_wallpaper(current_word, current_meaning)
-
-    # Update today's words
     today_words['last_word'] = current_word
     with open('today-words.txt', 'w') as f1:
         f1.write(json.dumps(today_words))
-
-
-def show_word_family():
-    with open('json_words_families.txt', 'r') as file:
-        word_json = json.loads(file.read())
-        meaning = random.choice(list(word_json.keys()))
-        words = ", ".join(word_json[meaning])
-        edit_wallpaper(meaning, words)
-
-
-def main():
-    x = random.randint(0,1)
-    single_word_meaning()
-    # show_word_family()
-    # if x == 0:
-    #     single_word_meaning()
-    # else:
-    #     show_word_family()
-
-    
 
 
 if __name__ == "__main__": main()
