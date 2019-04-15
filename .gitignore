@@ -1,6 +1,6 @@
 *.xml
 *.iml
-*.txt
+#*.txt
 .idea/*
 wallpaper.jpg
 *.swp
